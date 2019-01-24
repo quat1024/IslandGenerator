@@ -6,11 +6,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class IslandWorldSettings {
-	public IslandWorldSettings(int islandRadius) {
-		this.islandRadius = islandRadius;
+	public IslandWorldSettings() {
 	}
 	
-	public final int islandRadius;
+	public int islandSize;
+	public boolean bigRivers;
 	
 	public static IslandWorldSettings fromString(String s) {
 		Map<String, String> settingsMap = new HashMap<>();
@@ -18,15 +18,18 @@ public class IslandWorldSettings {
 		try {
 			for(String entry : s.split("\\|")) {
 				String[] entrySplit = entry.split("=");
-				settingsMap.put(entrySplit[0], entrySplit[1]);
+				if(entrySplit.length == 2) {
+					settingsMap.put(entrySplit[0], entrySplit[1]);
+				}
 			}
 		} catch(Exception e) {
 			IslandGenerator.LOGGER.error("Can't read island world type settings, using default", s, e);
 			settingsMap.clear();
 		}
 		
-		int islandRadius = Integer.valueOf(settingsMap.getOrDefault("radius", "100"));
-		
-		return new IslandWorldSettings(islandRadius);
+		IslandWorldSettings settings = new IslandWorldSettings();
+		settings.islandSize = Integer.valueOf(settingsMap.getOrDefault("islandSize", "5"));
+		settings.bigRivers = Boolean.valueOf(settingsMap.getOrDefault("bigRivers", "false"));
+		return settings;
 	}
 }
