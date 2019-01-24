@@ -43,16 +43,12 @@ public class ClientHandler {
 					}
 				}
 				
-				worldUi.selectedIndex = islandTypeIndex;
-				
 				if(islandTypeIndex == -1) {
 					IslandGenerator.LOGGER.info("cannot find the island world type on the gui");
 					return;
 				}
 				
-				if(worldUi.chunkProviderSettingsJson.isEmpty()) {
-					worldUi.chunkProviderSettingsJson = IslandsConfig.DEFAULT_WORLD_OPTIONS;
-				}
+				worldUi.selectedIndex = islandTypeIndex;
 			}
 		}
 	}

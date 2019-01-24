@@ -48,6 +48,10 @@ public class WorldTypeIsland extends WorldType {
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void onCustomizeButton(Minecraft mc, GuiCreateWorld cw) {
+		if(cw.chunkProviderSettingsJson.isEmpty()) {
+			cw.chunkProviderSettingsJson = IslandsConfig.DEFAULT_WORLD_OPTIONS;
+		}
+		
 		mc.displayGuiScreen(new GuiCustomizeIslandWorld(cw, cw.chunkProviderSettingsJson));
 	}
 }

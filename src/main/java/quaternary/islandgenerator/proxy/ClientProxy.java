@@ -1,4 +1,4 @@
 package quaternary.islandgenerator.proxy;
 
-public class ClientProxy {
+public class ClientProxy extends AbstractProxy {
 }
